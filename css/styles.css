@@ -1,127 +1,385 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
+/* =========================
+   BODY
+========================= */
+
+body{
+
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #222;
-    transition: 0.3s;
-    padding: 20px;
+
+    background:#111;
+
+    color:#f5f1e8;
+
+    padding:40px;
+
+    overflow-x:hidden;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 30px;
+/* textura tipo poster */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+        url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+
+    opacity:0.15;
+
+    pointer-events:none;
 }
 
-h1 {
-    margin-bottom: 20px;
+/* =========================
+   HEADER
+========================= */
+
+header{
+
+    margin-bottom:60px;
+
+    text-align:center;
 }
 
-.controls {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
+h1{
+
+    font-size:4rem;
+
+    letter-spacing:8px;
+
+    text-transform:uppercase;
+
+    color:#f8d49d;
+
+    margin-bottom:15px;
+
+    font-weight:900;
+
+    text-shadow:
+        0 0 20px rgba(248,212,157,0.2);
 }
 
-input {
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+/* línea decorativa */
+
+h1::after{
+
+    content:"";
+
+    display:block;
+
+    width:120px;
+
+    height:4px;
+
+    background:#c1121f;
+
+    margin:20px auto 0;
+
+    border-radius:999px;
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #333;
-    color: white;
-    transition: 0.3s;
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
 }
 
-button:hover {
-    opacity: 0.9;
+input{
+
+    width:320px;
+
+    padding:14px 20px;
+
+    border:none;
+
+    outline:none;
+
+    background:#1d1d1d;
+
+    color:white;
+
+    border-bottom:
+        2px solid #c1121f;
+
+    font-size:16px;
 }
 
-.catalog {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+input::placeholder{
+
+    color:#999;
 }
 
-.card {
-    background-color: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
+button{
+
+    padding:14px 24px;
+
+    border:none;
+
+    background:#c1121f;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    transition:0.3s;
 }
 
-.card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+button:hover{
+
+    background:#e5383b;
+
+    transform:translateY(-2px);
 }
 
-.card h2 {
-    padding: 15px 15px 5px;
+/* =========================
+   GRID
+========================= */
+
+.catalog{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(280px,1fr));
+
+    gap:35px;
 }
 
-.card p {
-    padding: 0 15px 15px;
-    line-height: 1.5;
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#181818;
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    transition:0.4s;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.4);
 }
 
-.hidden {
-    display: none;
+/* EFECTO VINILO */
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    border:
+        2px solid rgba(255,255,255,0.03);
+
+    top:-60px;
+
+    right:-60px;
 }
 
-#noResults {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 18px;
+/* IMAGEN */
+
+.card img{
+
+    width:100%;
+
+    height:240px;
+
+    object-fit:cover;
+
+    filter:
+        grayscale(20%)
+        contrast(110%);
+
+    transition:0.5s;
 }
 
-/* TABLET */
-@media (min-width: 600px) {
-    .catalog {
-        grid-template-columns: repeat(2, 1fr);
+/* CONTENIDO */
+
+.card h2{
+
+    font-size:1.6rem;
+
+    padding:20px 20px 10px;
+
+    color:#f8d49d;
+
+    line-height:1.2;
+}
+
+.card p{
+
+    padding:0 20px 25px;
+
+    color:#cfcfcf;
+
+    line-height:1.7;
+
+    font-size:15px;
+}
+
+/* HOVER */
+
+.card:hover{
+
+    transform:
+        translateY(-10px)
+        rotate(-1deg);
+
+    border-color:#c1121f;
+}
+
+.card:hover img{
+
+    transform:scale(1.06);
+
+    filter:
+        grayscale(0%)
+        contrast(120%);
+}
+
+/* efecto barra lateral */
+
+.card:hover::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:6px;
+
+    height:100%;
+
+    background:#c1121f;
+}
+
+/* =========================
+   NO RESULTS
+========================= */
+
+.hidden{
+    display:none;
+}
+
+#noResults{
+
+    text-align:center;
+
+    margin-top:40px;
+
+    color:#f8d49d;
+
+    font-size:20px;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+.dark-mode{
+
+    background:#f4efe6;
+
+    color:#111;
+}
+
+.dark-mode .card{
+
+    background:white;
+
+    color:#111;
+
+    border:
+        1px solid rgba(0,0,0,0.08);
+}
+
+.dark-mode .card p{
+
+    color:#333;
+}
+
+.dark-mode h1{
+
+    color:#7b2d26;
+}
+
+.dark-mode input{
+
+    background:white;
+
+    color:#111;
+
+    border-bottom:
+        2px solid #7b2d26;
+}
+
+.dark-mode button{
+
+    background:#7b2d26;
+}
+
+.dark-mode button:hover{
+
+    background:#9d4edd;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    h1{
+
+        font-size:2.5rem;
+
+        letter-spacing:4px;
     }
-}
 
-/* DESKTOP */
-@media (min-width: 1024px) {
-    .catalog {
-        grid-template-columns: repeat(3, 1fr);
+    body{
+
+        padding:20px;
     }
-}
 
-/* MODO OSCURO */
-
-.dark-mode {
-    background-color: #121212;
-    color: white;
-}
-
-.dark-mode .card {
-    background-color: #1f1f1f;
-    color: white;
-}
-
-.dark-mode input {
-    background-color: #333;
-    color: white;
-    border: 1px solid #555;
-}
-
-.dark-mode button {
-    background-color: #f4f4f4;
-    color: #121212;
 }
