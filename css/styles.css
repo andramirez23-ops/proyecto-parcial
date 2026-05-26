@@ -6,6 +6,12 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
+
+    transition:
+        background 0.4s ease,
+        color 0.4s ease,
+        transform 0.3s ease,
+        opacity 0.3s ease;
 }
 
 /* =========================
@@ -14,18 +20,30 @@
 
 body{
 
-    font-family: Arial, sans-serif;
+    font-family:"Space Grotesk", sans-serif;
 
-    background:#111;
+    background:
+        linear-gradient(
+            135deg,
+            #111,
+            #1d1d1d,
+            #2c1f33
+        );
+
+    background-size:400% 400%;
+
+    animation:bgMove 12s ease infinite;
 
     color:#f5f1e8;
 
     padding:40px;
 
     overflow-x:hidden;
+
+    min-height:100vh;
 }
 
-/* textura tipo poster */
+/* FONDO TEXTURA */
 
 body::before{
 
@@ -44,51 +62,61 @@ body::before{
 }
 
 /* =========================
+   ANIMACION FONDO
+========================= */
+
+@keyframes bgMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+/* =========================
    HEADER
 ========================= */
 
 header{
 
-    margin-bottom:60px;
-
     text-align:center;
+
+    margin-bottom:60px;
 }
 
 h1{
 
+    font-family:"Playfair Display", serif;
+
     font-size:4rem;
 
-    letter-spacing:8px;
-
-    text-transform:uppercase;
+    letter-spacing:6px;
 
     color:#f8d49d;
 
     margin-bottom:15px;
 
-    font-weight:900;
+    text-transform:uppercase;
 
     text-shadow:
-        0 0 20px rgba(248,212,157,0.2);
+        0 0 20px rgba(248,212,157,0.25);
 }
 
-/* línea decorativa */
+.subtitle{
 
-h1::after{
+    color:#cfcfcf;
 
-    content:"";
+    margin-bottom:30px;
 
-    display:block;
-
-    width:120px;
-
-    height:4px;
-
-    background:#c1121f;
-
-    margin:20px auto 0;
-
-    border-radius:999px;
+    letter-spacing:2px;
 }
 
 /* =========================
@@ -110,7 +138,7 @@ input{
 
     width:320px;
 
-    padding:14px 20px;
+    padding:15px 20px;
 
     border:none;
 
@@ -128,8 +156,20 @@ input{
 
 input::placeholder{
 
-    color:#999;
+    color:#888;
 }
+
+input:focus{
+
+    transform:scale(1.03);
+
+    box-shadow:
+        0 10px 25px rgba(193,18,31,0.2);
+}
+
+/* =========================
+   BUTTON
+========================= */
 
 button{
 
@@ -146,15 +186,15 @@ button{
     font-weight:bold;
 
     letter-spacing:1px;
-
-    transition:0.3s;
 }
 
 button:hover{
 
     background:#e5383b;
 
-    transform:translateY(-2px);
+    transform:
+        translateY(-3px)
+        scale(1.03);
 }
 
 /* =========================
@@ -186,10 +226,21 @@ button:hover{
     border:
         1px solid rgba(255,255,255,0.08);
 
-    transition:0.4s;
-
     box-shadow:
         0 10px 30px rgba(0,0,0,0.4);
+
+    opacity:0;
+
+    transform:translateY(40px);
+}
+
+/* REVEAL */
+
+.card.show{
+
+    opacity:1;
+
+    transform:translateY(0);
 }
 
 /* EFECTO VINILO */
@@ -214,7 +265,37 @@ button:hover{
     right:-60px;
 }
 
-/* IMAGEN */
+/* EFECTO GLOW */
+
+.card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent,
+            rgba(255,255,255,0.08),
+            transparent
+        );
+
+    opacity:0;
+
+    transition:0.5s;
+}
+
+.card:hover::after{
+
+    opacity:1;
+}
+
+/* =========================
+   IMAGEN
+========================= */
 
 .card img{
 
@@ -231,41 +312,6 @@ button:hover{
     transition:0.5s;
 }
 
-/* CONTENIDO */
-
-.card h2{
-
-    font-size:1.6rem;
-
-    padding:20px 20px 10px;
-
-    color:#f8d49d;
-
-    line-height:1.2;
-}
-
-.card p{
-
-    padding:0 20px 25px;
-
-    color:#cfcfcf;
-
-    line-height:1.7;
-
-    font-size:15px;
-}
-
-/* HOVER */
-
-.card:hover{
-
-    transform:
-        translateY(-10px)
-        rotate(-1deg);
-
-    border-color:#c1121f;
-}
-
 .card:hover img{
 
     transform:scale(1.06);
@@ -275,23 +321,85 @@ button:hover{
         contrast(120%);
 }
 
-/* efecto barra lateral */
+/* =========================
+   CARD CONTENT
+========================= */
 
-.card:hover::after{
+.card-content{
 
-    content:"";
+    padding:20px;
+}
 
-    position:absolute;
+/* TAG */
 
-    left:0;
+.tag{
 
-    top:0;
+    display:inline-block;
 
-    width:6px;
+    margin-bottom:12px;
 
-    height:100%;
+    padding:6px 12px;
 
     background:#c1121f;
+
+    color:white;
+
+    font-size:11px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    font-weight:bold;
+}
+
+/* TITULO */
+
+.card h2{
+
+    font-size:1.6rem;
+
+    color:#f8d49d;
+
+    margin-bottom:10px;
+}
+
+/* TEXTO */
+
+.card p{
+
+    color:#cfcfcf;
+
+    line-height:1.7;
+
+    font-size:15px;
+}
+
+/* =========================
+   HOVER
+========================= */
+
+.card:hover{
+
+    transform:
+        translateY(-12px)
+        rotate(-1deg)
+        scale(1.02);
+
+    border-color:#c1121f;
+
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.2);
+}
+
+/* BARRA LATERAL */
+
+.card:hover .card-content{
+
+    border-left:
+        4px solid #c1121f;
+
+    padding-left:16px;
 }
 
 /* =========================
@@ -299,6 +407,7 @@ button:hover{
 ========================= */
 
 .hidden{
+
     display:none;
 }
 
@@ -319,7 +428,13 @@ button:hover{
 
 .dark-mode{
 
-    background:#f4efe6;
+    background:
+        linear-gradient(
+            135deg,
+            #f4efe6,
+            #f8f3eb,
+            #e8d8c4
+        );
 
     color:#111;
 }
@@ -329,19 +444,16 @@ button:hover{
     background:white;
 
     color:#111;
+}
 
-    border:
-        1px solid rgba(0,0,0,0.08);
+.dark-mode .card h2{
+
+    color:#7b2d26;
 }
 
 .dark-mode .card p{
 
     color:#333;
-}
-
-.dark-mode h1{
-
-    color:#7b2d26;
 }
 
 .dark-mode input{
@@ -359,9 +471,19 @@ button:hover{
     background:#7b2d26;
 }
 
-.dark-mode button:hover{
+.dark-mode .tag{
 
-    background:#9d4edd;
+    background:#7b2d26;
+}
+
+.dark-mode .subtitle{
+
+    color:#333;
+}
+
+.dark-mode h1{
+
+    color:#7b2d26;
 }
 
 /* =========================
@@ -370,16 +492,16 @@ button:hover{
 
 @media(max-width:768px){
 
+    body{
+
+        padding:20px;
+    }
+
     h1{
 
         font-size:2.5rem;
 
-        letter-spacing:4px;
-    }
-
-    body{
-
-        padding:20px;
+        letter-spacing:3px;
     }
 
 }

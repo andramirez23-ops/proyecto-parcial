@@ -8,7 +8,7 @@ const themeToggle = document.getElementById("themeToggle");
 
 
 // =========================
-// FILTRO
+// FILTRO DINÁMICO
 // =========================
 
 searchInput.addEventListener("keyup", () => {
@@ -81,5 +81,30 @@ themeToggle.addEventListener("click", () => {
             "🌙 Modo Oscuro";
 
     }
+
+});
+
+
+// =========================
+// REVEAL SCROLL
+// =========================
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+});
+
+cards.forEach(card => {
+
+    observer.observe(card);
 
 });
